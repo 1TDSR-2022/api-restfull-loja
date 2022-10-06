@@ -66,9 +66,35 @@ public class ProdutoDAO {
 		return null;
 	}
 
+	//INSERT
 	public boolean insert(ProdutoTO pto) {
 		pto.setCodigo(listaProduto.size() + 1);
+		
 		return listaProduto.add(pto);
+		
+	}
+
+	public void update(ProdutoTO pto) {
+		
+		ProdutoTO produto = select(pto.getCodigo());
+		
+		produto.setTitulo(pto.getTitulo());
+		produto.setPreco(pto.getPreco());
+		produto.setQuantidade(pto.getQuantidade());
+		
+		for (int i = 0; i < listaProduto.size(); i++) {
+			if(listaProduto.get(i) == produto) {
+				listaProduto.set(i, produto);
+			}
+		}
+		
 	}
 	
+	
 }
+
+
+
+
+
+

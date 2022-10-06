@@ -17,7 +17,7 @@ public class ProdutoBO {
 	
 	public ProdutoTO listar(int id){
 		pd = new ProdutoDAO();
-		//REGRAS DE NEGÓCIO
+		//REGRAS DE NEGï¿½CIO
 		return pd.select(id);
 	}
 
@@ -25,5 +25,15 @@ public class ProdutoBO {
 		pd = new ProdutoDAO();
 		return pd.insert(pto);
 	}
+	
+	
+	public void atualizar(ProdutoTO pto) {
+		pd = new ProdutoDAO();
+		//REGRAS DE NEGÃ“CIO
+		pd.update(pto);
+	}
+	
+	
+	
 	
 }
