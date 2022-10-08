@@ -3,6 +3,7 @@ package br.com.fiap.resource;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -26,7 +27,7 @@ public class ProdutoResource {
 	//GET-ALL
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<ProdutoTO> buscar() {
+	public List<ProdutoTO> listaProdutos(){
 		return pb.listar();
 	}
 
@@ -34,25 +35,27 @@ public class ProdutoResource {
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ProdutoTO buscar(@PathParam("id") int id) {
-			return pb.listar(id);
-	}	
-	
+	public ProdutoTO listaProdutos(@PathParam("id") int id){
+		return pb.listar(id);
+	}
 	
 	//CADASTRAR PRODUTO
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response cadastrar(ProdutoTO produto, @Context UriInfo uriInfo) {
+		
+		//GERANDO O C�DIGO DO PRODUTO
 		pb.cadastrar(produto);
 		
+		//CONSTRUIR A URI DE RETORNO
 		UriBuilder builder = uriInfo.getAbsolutePathBuilder();
 		
+		//PARSEANDO E CONCATENANDO O C�DIGO DO PRODUTO COM A URL
 		builder.path(Integer.toString(produto.getCodigo()));
 		
+		//RETORNANDO A URL E TESTANDO A SOLICITA��O E REALIZANDO O POST.
 		return Response.created(builder.build()).build();
-		
 	}
-	
 	
 	@PUT
 	@Path("/{id}")
@@ -60,15 +63,22 @@ public class ProdutoResource {
 	public Response atualizar(ProdutoTO produto, @PathParam("id") int id) {
 		
 		produto.setCodigo(id);
-		
-		pb.atualizar(produto);
+		pb.atualiza(produto);
 		
 		return Response.ok().build();
 		
 	}
 	
+	@DELETE
+	@Path("/{id}")
+	public void excluir(@PathParam("id") int id) {
+		
+		pb.remover(id);
+	}
 	
-	
-	
-
 }
+
+
+
+
+

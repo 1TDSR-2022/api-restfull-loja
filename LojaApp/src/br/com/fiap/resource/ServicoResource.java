@@ -11,7 +11,7 @@ public class ServicoResource {
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	public double getSaldo() {
-		return 134.67;
+		return 123.56;
 	}
 
 }

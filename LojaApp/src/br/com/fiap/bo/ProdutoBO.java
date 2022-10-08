@@ -11,10 +11,9 @@ public class ProdutoBO {
 	
 	public List<ProdutoTO> listar(){
 		pd = new ProdutoDAO();
-		
 		return pd.select();
 	}
-	
+
 	public ProdutoTO listar(int id){
 		pd = new ProdutoDAO();
 		//REGRAS DE NEG�CIO
@@ -23,17 +22,27 @@ public class ProdutoBO {
 
 	public boolean cadastrar(ProdutoTO pto) {
 		pd = new ProdutoDAO();
+		//REGRAS DE NEG�CIO
 		return pd.insert(pto);
 	}
 	
-	
-	public void atualizar(ProdutoTO pto) {
+	public void atualiza(ProdutoTO pto) {
 		pd = new ProdutoDAO();
 		//REGRAS DE NEGÓCIO
 		pd.update(pto);
 	}
 	
-	
-	
+	public void remover(int id) {
+		pd = new ProdutoDAO();
+		pd.delete(id);
+	}
 	
 }
+
+
+
+
+
+
+
+
